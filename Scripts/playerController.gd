@@ -7,7 +7,7 @@ extends CharacterBody2D
 # Movimiento: píxeles/s y píxeles/s^2
 @export var max_speed: float = 400
 @export var vel_acceleration: float = 600
-@export var vel_deceleration: float = 100
+@export var vel_deceleration: float = 50
 
 var rotation_direction: float = 0
 var movement_direction: float = 0
@@ -34,7 +34,27 @@ func movement(delta):
 	else:
 		velocity += transform.x * movement_direction * (vel_acceleration * delta)
 		velocity = velocity.limit_length(max_speed)
+		
+func teleport():
+	var screen_size = get_viewport_rect().size
+	var sprite_size_x = $Sprite2D.texture.get_width() / 2
+	var sprite_size_y = $Sprite2D.texture.get_height() / 2
+	
+	#if global_position.y < -sprite_size_y:
+		#global_position.y = screen_size.y + sprite_size_y
+	#elif global_position.y > screen_size.y + sprite_size_y:
+		#global_position.y = -sprite_size_y
+	
+	#if global_position.x < -sprite_size_x:
+		#global_position.x = screen_size.x + sprite_size_x
+	#elif global_position.x > screen_size.x + sprite_size_x:
+		#global_position.x = -sprite_size_x
+	
+	position.x = wrapf(position.x, -sprite_size_x, screen_size.x + sprite_size_x)
+	position.y = wrapf(position.y, -sprite_size_y, screen_size.y + sprite_size_y)
+		
 
 func _physics_process(delta):
 	movement(delta)
 	move_and_slide()
+	teleport()
