@@ -50,4 +50,12 @@ texture = ExtResource("3_6t5aa")
 [node name="timer_max_outside" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="left_gun" type="Node2D" parent="."]
+position = Vector2(26, -28)
+rotation = 1.5707964
+
+[node name="right_gun" type="Node2D" parent="."]
+position = Vector2(26, 28)
+rotation = 1.5707964
+
 [connection signal="timeout" from="timer_max_outside" to="." method="_on_timer_max_outside_timeout"]

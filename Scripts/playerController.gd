@@ -35,6 +35,11 @@ var propeller_options = {
 
 @export var expel_force: float = 200
 
+# Disparar
+@onready var bullet = preload("res://Scenes/bullet.tscn")
+@onready var left_gun = $left_gun
+@onready var right_gun = $right_gun
+
 
 # Rotación y movimiento de la nave con aceleración y fricción
 func movement(delta):
@@ -114,8 +119,15 @@ func _on_timer_max_outside_timeout() -> void:
 	velocity = direction_to_center * expel_force
 	timer_max_outside.stop()
 
+func fire():
+	if Input.is_action_just_pressed("fire"):
+		var temp = bullet.instantiate()
+		left_gun.add_child(temp)
+		temp.global_position = left_gun.global_position
+		temp.rotation = rotation
 
 func _physics_process(delta):
 	movement(delta)
 	move_and_slide()
 	teleport()
+	fire()
