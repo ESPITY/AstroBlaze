@@ -14,7 +14,7 @@ script = ExtResource("1_cvnsp")
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_v0iea")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="spaceship" type="Sprite2D" parent="."]
 z_index = 1
 rotation = -1.5707964
 texture = ExtResource("1_v0iea")
@@ -46,3 +46,8 @@ position = Vector2(41, 39)
 rotation = 1.5707964
 scale = Vector2(1.5524426, 1.5524426)
 texture = ExtResource("3_6t5aa")
+
+[node name="timer_max_outside" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="timer_max_outside" to="." method="_on_timer_max_outside_timeout"]

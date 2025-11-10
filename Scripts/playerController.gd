@@ -29,13 +29,21 @@ var propeller_options = {
 	"down_left": [false, false, false, true]
 }
 
+# Wrap around
+@onready var spaceship_sprite = $spaceship
+@onready var timer_max_outside = $timer_max_outside
+
+@export var expel_force: float = 200
+
+
+
 
 # Rotación y movimiento de la nave con aceleración y fricción
 func movement(delta):
 	# Rotación con deceleración y aceleración
 	rotation_direction = Input.get_axis("left", "right")
 	#rotation += rotation_direction * rotation_speed * delta
-	if(rotation_direction == 0):
+	if rotation_direction == 0:
 		rotation_direction = sign(rotational_velocity) * -1
 	
 	rotational_velocity += rotation_direction * rotational_acceleration * delta
@@ -46,7 +54,7 @@ func movement(delta):
 	
 	# Movimiento con fricción y aceleración
 	movement_direction = Input.get_axis("down", "up")
-	if(movement_direction == 0):
+	if movement_direction == 0:
 		velocity = velocity.move_toward(Vector2.ZERO, (vel_deceleration * delta))
 	else:
 		velocity += transform.x * movement_direction * (vel_acceleration * delta)
@@ -85,15 +93,30 @@ func propulsion():
 	front_left_propeller.visible = propellers[2]
 	front_right_propeller.visible = propellers[3]
 	
-# Wrap around de los bordes	
+# Wrap around (teletransporte en los bordes y expulsión al campear)
 func teleport():
 	var screen_size = get_viewport_rect().size
-	var sprite_size_x = $Sprite2D.texture.get_width() / 2
-	var sprite_size_y = $Sprite2D.texture.get_height() / 2
+	var sprite_size = spaceship_sprite.texture.get_size() / 2
 	
-	position.x = wrapf(position.x, -sprite_size_x, screen_size.x + sprite_size_x)
-	position.y = wrapf(position.y, -sprite_size_y, screen_size.y + sprite_size_y)
-		
+	position.x = wrapf(position.x, -sprite_size.x, screen_size.x + sprite_size.x)
+	position.y = wrapf(position.y, -sprite_size.y, screen_size.y + sprite_size.y)
+	
+	# Si la nave está fuera de los límites comienza el temprizador de campear
+	var out_of_bounds = false
+	if (position.x < 0 or position.x > screen_size.x) or (position.y < 0 or position.y > screen_size.y):
+		out_of_bounds = true
+			
+	if out_of_bounds && timer_max_outside.is_stopped():
+		timer_max_outside.start()
+	elif !out_of_bounds && !timer_max_outside.is_stopped():
+		timer_max_outside.stop()
+
+# Cuando el jugador lleva demsiado tiempo fuera del mapa se le expulsa hacia el centro
+func _on_timer_max_outside_timeout() -> void:
+	var direction_to_center = (get_viewport_rect().size / 2 - position).normalized()
+	velocity = direction_to_center * expel_force
+	timer_max_outside.stop()
+
 
 func _physics_process(delta):
 	movement(delta)
