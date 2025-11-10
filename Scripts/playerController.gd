@@ -42,60 +42,41 @@ func movement(delta):
 
 # Visibilidad de los propulsores según el movimiento
 func propulsion():
+	var propeller_options = {
+		"none": [false, false, false, false],
+		"up": [true, true, false, false],
+		"down": [false, false, true, true],
+		"left": [false, true, false, false],
+		"right": [true, false, false, false],
+		"down_right": [false, false, true, false],
+		"down_left": [false, false, false, true]
+	}
+	
+	var input_action = "none"
 	if Input.is_action_pressed("up") && Input.is_action_pressed("right"):
-		back_left_propeller.visible = true
-		back_right_propeller.visible = false
-		front_left_propeller.visible = false
-		front_right_propeller.visible = false
-		
+		input_action = "right"
 	elif Input.is_action_pressed("up") && Input.is_action_pressed("left"):
-		back_left_propeller.visible = false
-		back_right_propeller.visible = true
-		front_left_propeller.visible = false
-		front_right_propeller.visible = false
-	
+		input_action = "left"
 	elif Input.is_action_pressed("down") && Input.is_action_pressed("right"):
-		back_left_propeller.visible = false
-		back_right_propeller.visible = false
-		front_left_propeller.visible = true
-		front_right_propeller.visible = false
-		
+		input_action = "down_right"	
 	elif Input.is_action_pressed("down") && Input.is_action_pressed("left"):
-		back_left_propeller.visible = false
-		back_right_propeller.visible = false
-		front_left_propeller.visible = false
-		front_right_propeller.visible = true
-	
+		input_action = "down_left"
 	elif Input.is_action_pressed("up"):
-		back_left_propeller.visible = true
-		back_right_propeller.visible = true
-		front_left_propeller.visible = false
-		front_right_propeller.visible = false
-		
+		input_action = "up"
 	elif Input.is_action_pressed("down"):
-		front_left_propeller.visible = true
-		front_right_propeller.visible = true
-		back_left_propeller.visible = false
-		back_right_propeller.visible = false
-		
+		input_action = "down"
 	elif Input.is_action_pressed("left"):
-		back_left_propeller.visible = false
-		back_right_propeller.visible = true
-		front_left_propeller.visible = false
-		front_right_propeller.visible = false
-		
+		input_action = "left"	
 	elif Input.is_action_pressed("right"):
-		back_left_propeller.visible = true
-		back_right_propeller.visible = false
-		front_left_propeller.visible = false
-		front_right_propeller.visible = false
-		
+		input_action = "right"
 	else:
-		back_left_propeller.visible = false
-		back_right_propeller.visible = false
-		front_left_propeller.visible = false
-		front_right_propeller.visible = false
-
+		input_action = "none"
+	
+	var propellers = propeller_options[input_action]
+	back_left_propeller.visible = propellers[0]
+	back_right_propeller.visible = propellers[1]
+	front_left_propeller.visible = propellers[2]
+	front_right_propeller.visible = propellers[3]
 	
 # Wrap around de los bordes	
 func teleport():
@@ -112,4 +93,3 @@ func _physics_process(delta):
 	move_and_slide()
 	teleport()
 	propulsion()
-	print(rotation_direction)
