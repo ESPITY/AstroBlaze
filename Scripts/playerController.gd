@@ -36,8 +36,6 @@ var propeller_options = {
 @export var expel_force: float = 200
 
 
-
-
 # Rotación y movimiento de la nave con aceleración y fricción
 func movement(delta):
 	# Rotación con deceleración y aceleración
@@ -50,7 +48,6 @@ func movement(delta):
 	rotational_velocity = clamp(rotational_velocity, -rotation_speed, rotation_speed)
 	
 	rotation += rotational_velocity * delta
-	
 	
 	# Movimiento con fricción y aceleración
 	movement_direction = Input.get_axis("down", "up")
