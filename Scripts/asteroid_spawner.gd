@@ -23,7 +23,18 @@ func spawn_asteroid():
 	var asteroid_inst = asteroid.instantiate()
 	asteroid_inst.size = Asteroid.asteroid_size.BIG
 	
-	var random_position = Vector2(randf_range(0, screen_size.x), randf_range(0, screen_size.y))
+	#match asteroid_inst.size:
+		#Asteroid.asteroid_size.BIG
+		#Asteroid.asteroid_size.BIG
+		#Asteroid.asteroid_size.BIG
+		#Asteroid.asteroid_size.BIG
+		#Asteroid.asteroid_size.BIG
+	
+	var random_position = Vector2(
+		randf_range(-asteroid_inst.size.x / 2, screen_size.x + asteroid_inst.size.x / 2),
+		randf_range(-asteroid_inst.size.y, screen_size.y + asteroid_inst.size.y / 2)
+		)
 	
 	asteroid_inst.global_position = random_position
 	self.add_child(asteroid_inst)
+	print("asteroide")

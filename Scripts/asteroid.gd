@@ -3,90 +3,56 @@ class_name Asteroid extends RigidBody2D
 var rng = RandomNumberGenerator.new()
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var sprite = $Sprite2D
+@onready var collision = $CollisionShape2D
 
 enum asteroid_size {HUGE, BIG, MEDIUM, SMALL, TINY}
 
 @export var size = asteroid_size.HUGE
 
-@onready var sprite = $Sprite2D
-@onready var collision = $CollisionShape2D
+var asteroid_data = {
+	asteroid_size.HUGE: {
+		"speed_range": Vector2(-100, 100),
+		"prefix": "Asteroid_Huge-"
+	},
+	asteroid_size.BIG: {
+		"speed_range": Vector2(-150, 150),
+		"prefix": "Asteroid_Big-"
+	},
+	asteroid_size.MEDIUM: {
+		"speed_range": Vector2(-200, 200),
+		"prefix": "Asteroid_Medium-"
+	},
+	asteroid_size.SMALL: {
+		"speed_range": Vector2(-250, 250),
+		"prefix": "Asteroid_Small-"
+	},
+	asteroid_size.TINY: {
+		"speed_range": Vector2(-300, 300),
+		"prefix": "Asteroid_Tiny-"
+	}
+}
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	var speed: float
-	var texture: int
-	match size:
-		asteroid_size.HUGE:
-			speed = randf_range(-100, 100)
-			texture = randi_range(1, 4)
-			match texture:
-				1:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Huge-1.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Huge-1.tres")
-				2:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Huge-2.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Huge-2.tres")
-				3:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Huge-3.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Huge-3.tres")
-				4:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Huge-4.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Huge-4.tres")
-		asteroid_size.BIG:
-			speed = randf_range(-150, 150)
-			texture = randi_range(1, 4)
-			match texture:
-				1:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Big-1.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Big-1.tres")
-				2:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Big-2.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Big-2.tres")
-				3:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Big-3.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Big-3.tres")
-				4:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Big-4.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Big-4.tres")
-		asteroid_size.MEDIUM:
-			speed = randf_range(-200, 200)
-			texture = randi_range(1, 2)
-			match texture:
-				1:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Medium-1.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Medium-1.tres")
-				2:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Medium-2.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Medium-2.tres")
-		asteroid_size.SMALL:
-			speed = randf_range(-250, 250)
-			texture = randi_range(1, 2)
-			match texture:
-				1:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Small-1.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Small-1.tres")
-				2:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Small-2.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Small-2.tres")
-		asteroid_size.TINY:
-			speed = randf_range(-300, 300)
-			texture = randi_range(1, 2)
-			match texture:
-				1:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Tiny-1.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Tiny-1.tres")
-				2:
-					sprite.texture = preload("res://Sprites/Asteroids/Asteroid_Tiny-2.png")
-					collision.shape = preload("res://Resources/Asteroid_CS_Tiny-2.tres")
+	var asteroid = asteroid_data[size]	
+	var speed = randf_range(asteroid["speed_range"].x, asteroid["speed_range"].y)
+	var suffix: int
+	
+	if (size == asteroid_size.HUGE) || (size == asteroid_size.BIG):
+		suffix = randi_range(1, 4)
+	elif (size == asteroid_size.MEDIUM) || (size == asteroid_size.TINY):
+		suffix = randi_range(1, 2)
+
+	var texture_path = "res://Sprites/Asteroids/" + asteroid["prefix"] + str(suffix) + ".png"
+	var collision_path = "res://Resources/" + asteroid["prefix"].replace("Asteroid_", "Asteroid_CS_") + str(suffix) + ".tres"
+  
+	sprite.texture = load(texture_path)
+	collision.shape = load(collision_path)
 	
 	rotation = randf_range(0, 2 * PI)
 	
 	# WHEIGHTED
-	var rand_num = rng.randf_range(-2, 2)
-	print(rand_num)
-	
-	self.set_global_scale(Vector2(rand_num, rand_num))
-	#$CollisionShape2D.set_global_scale(Vector2(rand_num, rand_num))
 	linear_velocity = Vector2(speed, speed)
 	angular_velocity = randf_range(-1, 1)
 
@@ -129,4 +95,4 @@ func split():
 		#get_parent().add_child(new_asteroid)
 
 func explode():
-	queue_free()	
+	queue_free()
