@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0exmhh0wrc71"]
+[gd_scene load_steps=4 format=3 uid="uid://b0exmhh0wrc71"]
 
+[ext_resource type="Script" uid="uid://dt70ctfgbhccq" path="res://Scripts/level.gd" id="1_6phgx"]
 [ext_resource type="PackedScene" uid="uid://dbr0we6yg5x5p" path="res://Scenes/player.tscn" id="1_tumq0"]
 [ext_resource type="PackedScene" uid="uid://dsxvpyxrk5ju4" path="res://Scenes/asteroid.tscn" id="2_k5f4k"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_6phgx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -13,3 +15,9 @@ rotation = -1.5707964
 
 [node name="asteroid" parent="." instance=ExtResource("2_k5f4k")]
 position = Vector2(665, 382)
+
+[node name="asteroid2" parent="." instance=ExtResource("2_k5f4k")]
+position = Vector2(1348, 204)
+
+[node name="asteroid3" parent="." instance=ExtResource("2_k5f4k")]
+position = Vector2(251, 276)
