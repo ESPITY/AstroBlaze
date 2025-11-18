@@ -30,7 +30,7 @@ var propeller_options = {
 }
 
 # Wrap around
-@onready var spaceship_sprite = $spaceship
+@onready var sprite = $spaceship
 @onready var timer_max_outside = $timer_max_outside
 
 @export var expel_force: float = 200
@@ -102,7 +102,7 @@ func propulsion():
 # Wrap around (teletransporte en los bordes y expulsión al campear)
 func teleport():
 	var screen_size = get_viewport_rect().size
-	var sprite_size = spaceship_sprite.texture.get_size() / 2
+	var sprite_size = sprite.texture.get_size() / 2
 	
 	global_position.x = wrapf(global_position.x, -sprite_size.x, screen_size.x + sprite_size.x)
 	global_position.y = wrapf(global_position.y, -sprite_size.y, screen_size.y + sprite_size.y)
@@ -147,3 +147,10 @@ func _physics_process(delta):
 	move_and_slide()
 	teleport()
 	fire()
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("asteroids"):
+		body.explode()
+		sprite.modulate = Color("ff8473ff")
+		await get_tree().create_timer(0.1).timeout
+		sprite.modulate = Color("ffffff")

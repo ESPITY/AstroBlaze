@@ -22,5 +22,6 @@ func _process(delta: float) -> void:
 	out_of_bounds()
 
 func _on_body_entered(body: Node2D) -> void:
-	body.explode()
+	if body.is_in_group("asteroids"):
+		body.explode()
 	queue_free()
