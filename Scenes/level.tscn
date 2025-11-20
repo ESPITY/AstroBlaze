@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://b0exmhh0wrc71"]
+[gd_scene load_steps=20 format=3 uid="uid://b0exmhh0wrc71"]
 
 [ext_resource type="Script" uid="uid://dt70ctfgbhccq" path="res://Scripts/level.gd" id="1_6phgx"]
 [ext_resource type="PackedScene" uid="uid://dbr0we6yg5x5p" path="res://Scenes/player.tscn" id="1_tumq0"]
+[ext_resource type="PackedScene" uid="uid://p18te3mbptsf" path="res://Scenes/hud.tscn" id="2_oqgf2"]
 [ext_resource type="PackedScene" uid="uid://b4yxq42ixguqi" path="res://Scenes/asteroid_spawner.tscn" id="3_6phgx"]
 [ext_resource type="Texture2D" uid="uid://bfk2xf4evjd8o" path="res://Sprites/planets/planet03.png" id="7_c7le1"]
 [ext_resource type="Texture2D" uid="uid://b33kbc07wl0qu" path="res://Sprites/planets/planet04.png" id="8_2klc5"]
@@ -70,6 +71,8 @@ color_initial_ramp = SubResource("GradientTexture1D_8c0lf")
 script = ExtResource("1_6phgx")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("2_oqgf2")]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_tumq0")]
 position = Vector2(968, 540)
