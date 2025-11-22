@@ -8,8 +8,11 @@ extends CharacterBody2D
 @onready var gun = $gun
 @onready var propeller = $propeller
 @onready var sprite = $spaceship
+@onready var timer_max_outside = $timer_max_outside
+@export var expel_force: float = 200
+@export var expel_state_time: int = 1.5
 var fired: bool = false
-enum State { APPROACHING, SHOOTING }
+enum State { APPROACHING, SHOOTING, EXPELLED }
 var current_state: State = State.APPROACHING
 
 var player: Node2D
@@ -23,7 +26,7 @@ func _ready():
 
 func _physics_process(delta):
 	var target_pos = shortest_path(player.global_position)
-	var distance = global_position.distance_to(target_pos)
+	var distance = global_position.distance_to(player.global_position)
 	
 	match current_state:
 		State.APPROACHING:
@@ -37,7 +40,7 @@ func _physics_process(delta):
 			if distance > shooting_distance:
 				current_state = State.APPROACHING
 			else:
-				rotate_towards(target_pos, delta)
+				rotate_towards(player.global_position, delta)
 				velocity = Vector2.ZERO
 	
 	move_and_slide()
@@ -89,7 +92,28 @@ func shortest_path(target_pos: Vector2) -> Vector2:
 	
 	return shortest_pos
 	
-# Wrap around (teletransporte en los bordes)
+# Wrap around (teletransporte en los bordes y expulsión)
 func teleport():
 	global_position.x = wrapf(global_position.x, -sprite_size.x, screen_size.x + sprite_size.x)
 	global_position.y = wrapf(global_position.y, -sprite_size.y, screen_size.y + sprite_size.y)
+	
+	# Si la nave está fuera de los límites comienza el temporizador de campear
+	var out_of_bounds = false
+	if (global_position.x < 0 or global_position.x > screen_size.x) or (global_position.y < 0 or global_position.y > screen_size.y):
+		out_of_bounds = true
+			
+	if out_of_bounds && timer_max_outside.is_stopped():
+		timer_max_outside.start()
+	elif !out_of_bounds && !timer_max_outside.is_stopped():
+		timer_max_outside.stop()
+
+# Cuando el jugador lleva demsiado tiempo fuera del mapa se le expulsa hacia el centro
+func _on_timer_max_outside_timeout() -> void:
+	current_state = State.EXPELLED
+	
+	var direction_to_center = (get_viewport_rect().size / 2 - global_position).normalized()
+	velocity = direction_to_center * expel_force
+	timer_max_outside.stop()
+	
+	await get_tree().create_timer(expel_state_time).timeout
+	current_state = State.APPROACHING

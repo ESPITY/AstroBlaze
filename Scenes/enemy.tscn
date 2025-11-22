@@ -38,5 +38,9 @@ scale = Vector2(1.05, 1.05)
 build_mode = 1
 polygon = PackedVector2Array(27.499998, -29.999996, 27.499998, -18.749998, 43.749996, -12.499999, 43.749996, 12.499999, 27.499998, 18.749998, 27.499998, 29.999996, -42.499996, 49.999996, -42.499996, -49.999996)
 
+[node name="timer_max_outside" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="timer_max_outside" to="." method="_on_timer_max_outside_timeout"]

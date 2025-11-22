@@ -124,7 +124,7 @@ func teleport():
 
 # Cuando el jugador lleva demsiado tiempo fuera del mapa se le expulsa hacia el centro
 func _on_timer_max_outside_timeout() -> void:
-	var direction_to_center = (get_viewport_rect().size / 2 - position).normalized()
+	var direction_to_center = (get_viewport_rect().size / 2 - global_position).normalized()
 	velocity = direction_to_center * expel_force
 	timer_max_outside.stop()
 
@@ -159,14 +159,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		# Empuje según la dirección y la masa del asteroide
 		var asteroid = AsteroidConfig.ASTEROID_DATA[body.size]
 		
-		var push_direction = (body.global_position - global_position).normalized()
-		
-		var push_force = asteroid["push_force"]
-		body.apply_central_impulse(push_direction * push_force)
-		
-		# Retroceso
-		var player_knockback = asteroid["knockback_force"]
-		velocity += push_direction * -1 * player_knockback
+		#var push_direction = (body.global_position - global_position).normalized()
+		#
+		#var push_force = asteroid["push_force"]
+		#body.apply_central_impulse(push_direction * push_force)
+		#
+		## Retroceso
+		#var player_knockback = asteroid["knockback_force"]
+		#velocity += push_direction * -1 * player_knockback
 		
 		body.explode()
 		damaged(asteroid["attack"])
