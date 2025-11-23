@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgbnlknht21on"
-path="res://.godot/imported/button_square_header_small_square_screws.png-e36eb67b857b5a951169d0d308df902e.ctex"
+uid="uid://dgd0ejjllpod"
+path="res://.godot/imported/Panel_Level2.png-e74db4b5511fcd0106e96d1c961afcc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ui/button_square_header_small_square_screws.png"
-dest_files=["res://.godot/imported/button_square_header_small_square_screws.png-e36eb67b857b5a951169d0d308df902e.ctex"]
+source_file="res://Sprites/ui/Panel_Level2.png"
+dest_files=["res://.godot/imported/Panel_Level2.png-e74db4b5511fcd0106e96d1c961afcc7.ctex"]
 
 [params]
 
