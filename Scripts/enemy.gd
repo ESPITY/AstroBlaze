@@ -36,6 +36,8 @@ var sprite_size: Vector2
 var fired: bool = false
 
 
+
+
 # Obtiene la referencia al jugador, el tamaño de la pantalla y de la mitad del sprite y configura el NavAgent2D
 func _ready():
 	var nodes = get_tree().get_nodes_in_group("player")
@@ -56,12 +58,14 @@ func _physics_process(delta):
 	
 	match current_state:
 		State.APPROACHING:
+			propeller.visible = true 
 			if distance <= shooting_distance:
 				current_state = State.SHOOTING
 			else:
 				update_nav()
 		
 		State.SHOOTING:
+			propeller.visible = false
 			fire()
 			if distance > shooting_distance:
 				current_state = State.APPROACHING
@@ -71,6 +75,7 @@ func _physics_process(delta):
 				move_and_slide()
 				
 		State.EXPELLED:
+			propeller.visible = true 
 			move_and_slide()
 
 func _process(delta):

@@ -10,26 +10,10 @@ var spawner: Dictionary
 var screen_size: Vector2
 var texture_size: Vector2
 
-# Datos de configuración del spawner según el nivel
-const SPAWNER_DATA = {
-	1: {
-		"max_enemies": 5,
-		"spawn_interval": 2.0,
-	},
-	2: {
-		"max_enemies": 10,
-		"spawn_interval": 2.0,
-	},
-	3: {
-		"max_enemies": 15,
-		"spawn_interval": 0.5,
-	}
-}
-
 
 # Ajusta el tiempo de spawneo según el nivel
 func _ready() -> void:
-	spawner = SPAWNER_DATA[Globals.current_level]
+	spawner = Config.ENEMY_SPAWNER_DATA[Config.current_level]
 	spawn_timer.wait_time = spawner["spawn_interval"]
 	
 	screen_size = get_viewport_rect().size
@@ -46,7 +30,7 @@ func rand_position():
 
 # Spawnea el enemigo en una posición aleatoria fuera de pantalla
 func spawn_asteroid():
-	Globals.active_enemies += 1
+	Config.active_enemies += 1
 
 	var new_pos = rand_position()
 	
@@ -57,5 +41,5 @@ func spawn_asteroid():
 
 # Cuando pasa el tiempo de spawneo se crea un asteroide si no se ha alcanzado el maximo (tamaño aleatorio)	
 func _on_spawn_timer_timeout() -> void:
-	if Globals.active_enemies < spawner["max_enemies"]:
+	if Config.active_enemies < spawner["max_enemies"]:
 		spawn_asteroid()

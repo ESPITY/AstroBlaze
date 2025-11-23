@@ -36,4 +36,7 @@ func out_of_bounds():
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("asteroids"):
 		body.explode()
+	if body.is_in_group("player"):
+		body.damaged(Config.ENEMY_DATA["hit_object"])
+		body.hit_effect()
 	queue_free()

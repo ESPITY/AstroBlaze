@@ -1,8 +1,58 @@
-class_name AsteroidConfig extends Node
+# config.gd
+extends Node
 
+# ----------------------------- VARIABLES GLOBALES -----------------------------
+var current_level: int = 1
+var active_asteroids: int = 0
+var active_enemies: int = 0
+
+# ---------------------------------- ENEMIGOS ----------------------------------
+# Golpes (balas y choque) de los ENEMIGOS
+const ENEMY_DATA = {
+	"attack": 10,
+	"hit_object": 5
+}
+
+# Datos de configuración del SPAWNER ENEMIGOS según el NIVEL
+const ENEMY_SPAWNER_DATA = {
+	1: {
+		"max_enemies": 5,
+		"spawn_interval": 2.0,
+	},
+	2: {
+		"max_enemies": 10,
+		"spawn_interval": 2.0,
+	},
+	3: {
+		"max_enemies": 15,
+		"spawn_interval": 0.5,
+	}
+}
+
+# --------------------------------- ASTEROIDES ---------------------------------
 enum asteroid_size {HUGE, BIG, MEDIUM, SMALL, TINY}
 
-# Datos de configuración del asteroide según el tamaño
+# Datos de configuración del SPAWNER ASTEROIDES según el NIVEL
+const ASTEROID_SPAWNER_DATA = {
+	1: {
+		"max_asteroids": 5,
+		"spawn_interval": 2.0,
+		# Huge, big, medium, small, tiny
+		"size_rand_weights": [2.0, 1.0, 0.5]
+	},
+	2: {
+		"max_asteroids": 10,
+		"spawn_interval": 1.0,
+		"size_rand_weights": [1.0, 2.0, 0.5]
+	},
+	3: {
+		"max_asteroids": 15,
+		"spawn_interval": 0.5,
+		"size_rand_weights": [0.5, 1.0, 2.0]
+	}
+}
+
+# Datos de configuración del ASTEROIDE según el TAMAÑO
 const ASTEROID_DATA = {
 	asteroid_size.HUGE: {
 		"speed_range": Vector2(50, 100),
@@ -76,27 +126,7 @@ const ASTEROID_DATA = {
 	}
 }
 
-# Datos de configuración del spawner según el nivel
-const SPAWNER_DATA = {
-	1: {
-		"max_asteroids": 5,
-		"spawn_interval": 2.0,
-		# Huge, big, medium, small, tiny
-		"size_rand_weights": [2.0, 1.0, 0.5]
-	},
-	2: {
-		"max_asteroids": 10,
-		"spawn_interval": 1.0,
-		"size_rand_weights": [1.0, 2.0, 0.5]
-	},
-	3: {
-		"max_asteroids": 15,
-		"spawn_interval": 0.5,
-		"size_rand_weights": [0.5, 1.0, 2.0]
-	}
-}
-
-# Patrones de tamaños de divisón del asteroide
+# Patrones de tamaños de DIVISIÓN del ASTEROIDE
 const SPLIT_PATTERNS = {
 	asteroid_size.HUGE: {
 		asteroid_size.BIG: Vector2i (2, 3),

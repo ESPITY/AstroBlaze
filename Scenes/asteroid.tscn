@@ -8,7 +8,7 @@ friction = 0.0
 
 [node name="asteroid" type="RigidBody2D" groups=["asteroids"]]
 collision_layer = 16
-collision_mask = 15
+collision_mask = 31
 physics_material_override = SubResource("PhysicsMaterial_a2bka")
 gravity_scale = 0.0
 max_contacts_reported = 9

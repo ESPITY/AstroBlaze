@@ -1,7 +1,7 @@
 class_name Asteroid extends RigidBody2D
 
 
-@export var size = AsteroidConfig.asteroid_size.HUGE
+@export var size = Config.asteroid_size.HUGE
 @export var max_speed: float = 400
 @export var expel_force: float = 200
 
@@ -21,7 +21,7 @@ signal exploded(size, pos)	# Cuando explota se lo indica al spawner (dividirse)
 
 
 func _ready() -> void:
-	asteroid = AsteroidConfig.ASTEROID_DATA[size]	
+	asteroid = Config.ASTEROID_DATA[size]	
 
 	sprite.texture = texture
 	screen_size = get_viewport_rect().size

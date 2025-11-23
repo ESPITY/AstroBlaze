@@ -3,7 +3,7 @@ extends Control
 
 # En el menú principal el nivel actual es 0
 func _ready() -> void:
-	Globals.current_level = 0
+	Config.current_level = 0
 
 # Botón de jugar que lleva al selector de niveles
 func _on_play_button_pressed() -> void:

@@ -6,10 +6,10 @@ extends Node2D
 var screen_size: Vector2
 
 func _ready() -> void:
-	Globals.active_asteroids = 0
-	Globals.active_enemies = 0
+	Config.active_asteroids = 0
+	Config.active_enemies = 0
 	
-	match Globals.current_level:
+	match Config.current_level:
 		1: $level_planets/level1_planets.visible = true
 		2: $level_planets/level2_planets.visible = true
 		3: $level_planets/level3_planets.visible = true
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
 	#print("NavigationRegion rebaked - Asteroides: ", get_tree().get_nodes_in_group("asteroids").size())
-	#print(Globals.active_asteroids)
+	#print(Config.active_asteroids)
 
 # Cuando se termina de bakear el NavRegion2D se vuelve a bakear
 func _on_navigation_region_2d_bake_finished() -> void:

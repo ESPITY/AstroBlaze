@@ -6,12 +6,12 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 var spawner: Dictionary
-var available_sizes = [AsteroidConfig.asteroid_size.MEDIUM, AsteroidConfig.asteroid_size.BIG, AsteroidConfig.asteroid_size.HUGE]
+var available_sizes = [Config.asteroid_size.MEDIUM, Config.asteroid_size.BIG, Config.asteroid_size.HUGE]
 
 
 # Ajusta el tiempo de spawneo según el nivel
 func _ready() -> void:
-	spawner = AsteroidConfig.SPAWNER_DATA[Globals.current_level]
+	spawner = Config.ASTEROID_SPAWNER_DATA[Config.current_level]
 	spawn_timer.wait_time = spawner["spawn_interval"]
 	
 # Tamaño aleatorio con pesos según el nivel
@@ -21,10 +21,10 @@ func rand_size():
 
 # Asignar una textura aleatoria según el tamaño del nuevo asteroide	
 func rand_texture(size):
-	var num_textures = AsteroidConfig.ASTEROID_DATA[size]["num_textures"]
+	var num_textures = Config.ASTEROID_DATA[size]["num_textures"]
 	var suffix = randi_range(1, num_textures)
 
-	var texture_path = "res://Sprites/asteroids_sprites/" + AsteroidConfig.ASTEROID_DATA[size]["prefix"] + str(suffix) + ".png"
+	var texture_path = "res://Sprites/asteroids_sprites/" + Config.ASTEROID_DATA[size]["prefix"] + str(suffix) + ".png"
 	
 	return load(texture_path)
 
@@ -42,14 +42,14 @@ func rand_position(texture):
 
 # Cuando pasa el tiempo de spawneo se crea un asteroide si no se ha alcanzado el maximo (tamaño aleatorio)	
 func _on_spawn_timer_timeout() -> void:
-	if Globals.active_asteroids < spawner["max_asteroids"]:
+	if Config.active_asteroids < spawner["max_asteroids"]:
 		var asteroid_size = rand_size()
 		spawn_asteroid(asteroid_size)
 
 # Spawnea el asteroide con el tamaño y la posición recibidos
 func spawn_asteroid(size, pos: Vector2 = Vector2.ZERO):
-	if AsteroidConfig.ASTEROID_DATA[size]["collision"]:
-		Globals.active_asteroids += 1
+	if Config.ASTEROID_DATA[size]["collision"]:
+		Config.active_asteroids += 1
 	
 	var texture = rand_texture(size)
 	
@@ -70,9 +70,9 @@ func spawn_asteroid(size, pos: Vector2 = Vector2.ZERO):
 
 # Cuando un asteroide explota se divide según unos patrones (tamaños)
 func _on_asteroid_exploded(pos, original_size):
-	Globals.active_asteroids -= 1
+	Config.active_asteroids -= 1
 	
-	var split_patterns = AsteroidConfig.SPLIT_PATTERNS[original_size]
+	var split_patterns = Config.SPLIT_PATTERNS[original_size]
 	
 	for new_asteroid_size in split_patterns:
 		var min_range = split_patterns[new_asteroid_size][0]
