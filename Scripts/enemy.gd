@@ -36,9 +36,12 @@ var sprite_size: Vector2
 var fired: bool = false
 
 
-# Obtiene el tamaño de la pantalla y de la mitad del sprite, referencia al jugador y configura el NavAgent2D
+# Obtiene la referencia al jugador, el tamaño de la pantalla y de la mitad del sprite y configura el NavAgent2D
 func _ready():
-	player = get_tree().get_first_node_in_group("player")
+	var nodes = get_tree().get_nodes_in_group("player")
+	for node in nodes:
+		if node is CharacterBody2D:
+			player = node
 	
 	screen_size = get_viewport_rect().size
 	sprite_size = sprite.texture.get_size() / 2

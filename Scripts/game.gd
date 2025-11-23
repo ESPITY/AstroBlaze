@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var nav_region = $NavigationRegion2D
-@onready var player = $NavigationRegion2D/player
+@onready var player = $NavigationRegion2D/player_items/player
 
 var screen_size: Vector2
 

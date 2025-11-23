@@ -7,12 +7,19 @@ extends Area2D
 @onready var bullet_sprite = $bullet_sprite
 
 
-# Called when the node enters the scene tree for the first time.
+# Configura textura, colisiones y máscaras según el origen del disparo (jugador/enemigo)
 func _ready() -> void:
 	if get_parent().is_in_group("player"):
-		bullet_sprite = player_bullet_texture
+		bullet_sprite.texture = player_bullet_texture
+		set_collision_layer_value(1, true)		# player_bullets
+		set_collision_mask_value(3, true)		# enemies
+		set_collision_mask_value(5, true)		# asteroids
+		
 	elif get_parent().is_in_group("enemies"):
-		bullet_sprite = enemy_bullet_texture
+		bullet_sprite.texture = enemy_bullet_texture
+		set_collision_layer_value(4, true)		# enemy_bullets
+		set_collision_mask_value(1, true)		# player
+		set_collision_mask_value(5, true)		# asteroids
 	
 func _process(delta: float) -> void:
 	global_position += Vector2(speed * delta, 0).rotated(rotation)

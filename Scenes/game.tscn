@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://rbqptld2emug" path="res://Scenes/enemy_spawner.tscn" id="10_o5yvi"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_o5yvi"]
+parsed_collision_mask = 4294967061
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_ldgsr")
@@ -20,7 +21,7 @@ script = ExtResource("1_ldgsr")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="hud" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("2_o5yvi")]
-player = NodePath("../../NavigationRegion2D/player")
+player = NodePath("../../NavigationRegion2D/player_items/player")
 
 [node name="level_planets" type="Node2D" parent="."]
 
@@ -84,7 +85,9 @@ navigation_polygon = SubResource("NavigationPolygon_o5yvi")
 
 [node name="enemy_spawner" parent="NavigationRegion2D" instance=ExtResource("10_o5yvi")]
 
-[node name="player" parent="NavigationRegion2D" instance=ExtResource("3_rku1e")]
+[node name="player_items" type="Node2D" parent="NavigationRegion2D" groups=["player"]]
+
+[node name="player" parent="NavigationRegion2D/player_items" instance=ExtResource("3_rku1e")]
 position = Vector2(960, 540)
 rotation = -1.5707964
 scale = Vector2(0.7999999, 0.7999999)

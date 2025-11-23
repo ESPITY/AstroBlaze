@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cbb6up2g184tt" path="res://Scenes/enemy.tscn" id="2_cdqhx"]
 [ext_resource type="Texture2D" uid="uid://brpbo800d2dl2" path="res://Sprites/spaceships/enemy_spaceship.png" id="3_tdwud"]
 
-[node name="enemy_spawner" type="Node2D"]
+[node name="enemy_spawner" type="Node2D" groups=["enemies"]]
 script = ExtResource("1_4l55s")
 enemy = ExtResource("2_cdqhx")
 texture = ExtResource("3_tdwud")
