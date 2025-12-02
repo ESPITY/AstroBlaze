@@ -4,7 +4,7 @@ extends Node2D
 @onready var player = $NavigationRegion2D/player_items/player
 @onready var pause_screen = $pause_screen
 
-@export var death_screen: PackedScene
+@onready var death_screen = preload("res://Scenes/ui_scenes/death_screen.tscn")
 
 var screen_size: Vector2
 var level_start_time: float = 0.0
