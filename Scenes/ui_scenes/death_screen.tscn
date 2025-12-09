@@ -34,9 +34,9 @@ theme_override_constants/separation = 150
 [node name="title" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 640
-theme_override_constants/margin_top = 280
-theme_override_constants/margin_right = 640
+theme_override_constants/margin_left = 610
+theme_override_constants/margin_top = 260
+theme_override_constants/margin_right = 610
 theme_override_constants/margin_bottom = 0
 
 [node name="Panel" type="Panel" parent="VBoxContainer/title"]

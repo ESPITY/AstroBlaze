@@ -48,10 +48,10 @@ grow_vertical = 2
 [node name="title" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 640
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 640
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 630
+theme_override_constants/margin_top = 90
+theme_override_constants/margin_right = 630
+theme_override_constants/margin_bottom = 90
 
 [node name="Panel" type="Panel" parent="VBoxContainer/title"]
 layout_mode = 2
@@ -131,16 +131,26 @@ offset_right = 96.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 26
+theme_override_constants/separation = 40
 
 [node name="Label" type="Label" parent="VBoxContainer/levels/HBoxContainer/Panel/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/outline_size = 8
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("3_3r66n")
-theme_override_font_sizes/font_size = 36
-text = "Objective"
+theme_override_font_sizes/font_size = 30
+text = "Objective: %9999"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/levels/HBoxContainer/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_3r66n")
+theme_override_font_sizes/font_size = 30
+text = "Best Time: 99:99:99"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_group_ = true
 
 [node name="level_1_button" type="Button" parent="VBoxContainer/levels/HBoxContainer/Panel/VBoxContainer"]
 layout_mode = 2
