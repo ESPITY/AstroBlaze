@@ -14,8 +14,8 @@ var playing: bool = false
 # Objetivos de puntuación por nivel
 const LEVEL_TARGET_SCORE = {
 	1: 1000,
-	2: 3000,
-	3: 6000
+	2: 2000,
+	3: 3000
 }
 
 # Tiempo record de completar cada nivel
@@ -51,11 +51,11 @@ const ENEMY_SPAWNER_DATA = {
 		"spawn_interval": 15,
 	},
 	2: {
-		"max_enemies": 4,
+		"max_enemies": 3,
 		"spawn_interval": 10.0,
 	},
 	3: {
-		"max_enemies": 6,
+		"max_enemies": 4,
 		"spawn_interval": 5.0,
 	}
 }
@@ -72,12 +72,12 @@ const ASTEROID_SPAWNER_DATA = {
 		"size_rand_weights": [2.0, 1.0, 0.5]
 	},
 	2: {
-		"max_asteroids": 10,
+		"max_asteroids": 8,
 		"spawn_interval": 1.0,
 		"size_rand_weights": [1.0, 2.0, 0.5]
 	},
 	3: {
-		"max_asteroids": 15,
+		"max_asteroids": 11,
 		"spawn_interval": 0.5,
 		"size_rand_weights": [0.5, 1.0, 2.0]
 	}
