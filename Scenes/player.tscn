@@ -9,8 +9,7 @@
 scale = Vector2(0.8, 0.8)
 collision_mask = 28
 script = ExtResource("1_cvnsp")
-rotational_acceleration = 4.0
-vel_acceleration = 200.0
+vel_deceleration = 200.0
 fire_rate = 0.3
 
 [node name="spaceship_sprite" type="Sprite2D" parent="."]
