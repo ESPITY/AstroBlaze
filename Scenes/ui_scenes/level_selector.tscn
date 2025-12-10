@@ -489,4 +489,6 @@ theme_override_styles/hover = ExtResource("7_7saco")
 text = "BACK"
 
 [connection signal="pressed" from="VBoxContainer/levels/HBoxContainer/level1/MarginContainer/VBoxContainer/level_1_button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/levels/HBoxContainer/level2/MarginContainer/VBoxContainer/level_2_button" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/levels/HBoxContainer/level3/MarginContainer/VBoxContainer/level_3_button" to="." method="_on_level_3_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/back/Panel/MarginContainer/back_button" to="." method="_on_back_button_pressed"]

@@ -38,9 +38,9 @@ const PLAYER_DATA = {
 
 # Golpes (balas y choque) de los ENEMIGOS
 const ENEMY_DATA = {
-	"attack": 10,
+	"attack": 5,
 	"hit_object": 5,
-	"max_health": 100,
+	"max_health": 60,
 	"points": 150
 }
 
@@ -48,15 +48,15 @@ const ENEMY_DATA = {
 const ENEMY_SPAWNER_DATA = {
 	1: {
 		"max_enemies": 2,
-		"spawn_interval": 2.0,
+		"spawn_interval": 15,
 	},
 	2: {
 		"max_enemies": 4,
-		"spawn_interval": 1.5,
+		"spawn_interval": 10.0,
 	},
 	3: {
 		"max_enemies": 6,
-		"spawn_interval": 1.0,
+		"spawn_interval": 5.0,
 	}
 }
 
