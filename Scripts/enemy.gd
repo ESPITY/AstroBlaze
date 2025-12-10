@@ -1,3 +1,4 @@
+# TO-DO REFACTOR: herencia de clase base
 extends CharacterBody2D
 
 # Navigation

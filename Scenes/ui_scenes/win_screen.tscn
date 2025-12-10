@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dwmbaqum8x375"]
+[gd_scene load_steps=15 format=3 uid="uid://dwmbaqum8x375"]
 
 [ext_resource type="Script" uid="uid://dbeumfxk6r8wn" path="res://Scripts/ui_scripts/win_screen.gd" id="1_s1rtq"]
 [ext_resource type="Texture2D" uid="uid://5ykemf7p36lh" path="res://Sprites/ui/button_rectangle.png" id="2_7piwm"]
@@ -6,9 +6,53 @@
 [ext_resource type="StyleBox" uid="uid://2rw3badxkoaf" path="res://Resources/buttons_themes/button_normal.tres" id="4_j6k0s"]
 [ext_resource type="StyleBox" uid="uid://0sfabesjaq6g" path="res://Resources/buttons_themes/button_pressed.tres" id="5_c6gew"]
 [ext_resource type="StyleBox" uid="uid://bdd46xgdpk83q" path="res://Resources/buttons_themes/button_hover.tres" id="6_5l13k"]
+[ext_resource type="Texture2D" uid="uid://bw1xynu23lsqm" path="res://Sprites/ui/UI_time.png" id="7_7piwm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4e4vb"]
 texture = ExtResource("2_7piwm")
+
+[sub_resource type="Animation" id="Animation_7piwm"]
+resource_name = "new_record_blink_effect"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("new_record/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1, 1.2, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tgmyb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("new_record/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j6k0s"]
+_data = {
+&"RESET": SubResource("Animation_tgmyb"),
+&"new_record_blink_effect": SubResource("Animation_7piwm")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tgmyb"]
+texture = ExtResource("7_7piwm")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7piwm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ihvk2"]
 texture = ExtResource("2_7piwm")
@@ -21,6 +65,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_s1rtq")
+
+[node name="new_record" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 810.0
+offset_top = 366.0
+offset_right = 1110.0
+offset_bottom = 450.0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_4e4vb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="new_record"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_j6k0s")
+}
+autoplay = "new_record_blink_effect"
+
+[node name="Label" type="Label" parent="new_record"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.8, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 14
+theme_override_fonts/font = ExtResource("3_tgmyb")
+theme_override_font_sizes/font_size = 30
+text = "NEW RECORD!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -70,31 +149,51 @@ vertical_alignment = 1
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/margin_left = 652
-theme_override_constants/margin_top = 100
-theme_override_constants/margin_right = 652
-theme_override_constants/margin_bottom = 100
+theme_override_constants/margin_left = 730
+theme_override_constants/margin_top = 110
+theme_override_constants/margin_right = 730
+theme_override_constants/margin_bottom = 110
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxTexture_4e4vb")
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/Panel2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel2"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.5
+offset_top = -40.0
+offset_right = 183.5
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/Panel2/HBoxContainer"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_tgmyb")
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/MarginContainer/Panel2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+theme_override_styles/separator = SubResource("StyleBoxEmpty_7piwm")
+
+[node name="lvl_time" type="Label" parent="VBoxContainer/MarginContainer/Panel2/HBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_constants/outline_size = 16
+theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 14
 theme_override_fonts/font = ExtResource("3_tgmyb")
-theme_override_font_sizes/font_size = 48
-text = "Time: %99:99:99"
+theme_override_font_sizes/font_size = 44
+text = "99:99:99"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -178,7 +277,7 @@ theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = ExtResource("4_j6k0s")
 theme_override_styles/pressed = ExtResource("5_c6gew")
 theme_override_styles/hover = ExtResource("6_5l13k")
-text = "MENU
+text = "LEVELS
 "
 
 [connection signal="pressed" from="VBoxContainer/buttons/MarginContainer2/Panel/MarginContainer/restart_button" to="." method="_on_restart_button_pressed"]

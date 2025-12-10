@@ -5,6 +5,7 @@ extends Node2D
 @onready var pause_screen = $pause_screen
 
 @onready var death_screen = preload("res://Scenes/ui_scenes/death_screen.tscn")
+@onready var win_screen = preload("res://Scenes/ui_scenes/win_screen.tscn")
 
 var screen_size: Vector2
 var level_start_time: float = 0.0
@@ -17,12 +18,15 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	if Config.playing:
-		Config.level_elapsed_time = (Time.get_ticks_msec() / 1000.0) - level_start_time	
+		Config.level_elapsed_time = (Time.get_ticks_msec() / 1000.0) - level_start_time
+		if Config.current_score >= Config.LEVEL_TARGET_SCORE[Config.current_level]:
+			get_tree().change_scene_to_packed(win_screen)
 			
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
 	#print("NavigationRegion rebaked - Asteroides: ", get_tree().get_nodes_in_group("asteroids").size())
 	#print(Config.active_asteroids)
+	
 
 # Configuración inicial del juego
 func start_game():

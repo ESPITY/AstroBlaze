@@ -147,8 +147,7 @@ theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = ExtResource("4_wq2ht")
 theme_override_styles/pressed = ExtResource("5_6mbel")
 theme_override_styles/hover = ExtResource("6_ne20l")
-text = "MENU
-"
+text = "LEVELS"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MarginContainer2/Panel/MarginContainer/restart_button" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MarginContainer3/Panel2/MarginContainer/menu_button" to="." method="_on_menu_button_pressed"]

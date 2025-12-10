@@ -18,10 +18,11 @@ const LEVEL_TARGET_SCORE = {
 	3: 6000
 }
 
-var level_score_records = {
-	1: {"best_score": 0, "best_time": 0.0, "completed": false},
-	2: {"best_score": 0, "best_time": 0.0, "completed": false},
-	3: {"best_score": 0, "best_time": 0.0, "completed": false}
+# Tiempo record de completar cada nivel
+var LEVEL_TIME_RECORDS = {
+	1: 0,
+	2: 0,
+	3: 0
 }
 
 # ---------------------------------- JUGADOR ----------------------------------
