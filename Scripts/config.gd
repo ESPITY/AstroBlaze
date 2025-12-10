@@ -51,11 +51,11 @@ const ENEMY_SPAWNER_DATA = {
 		"spawn_interval": 15,
 	},
 	2: {
-		"max_enemies": 3,
+		"max_enemies": 4,
 		"spawn_interval": 10.0,
 	},
 	3: {
-		"max_enemies": 4,
+		"max_enemies": 6,
 		"spawn_interval": 5.0,
 	}
 }
@@ -88,8 +88,8 @@ const ASTEROID_DATA = {
 	asteroid_size.HUGE: {
 		"speed_range": Vector2(50, 100),
 		"prefix": "Asteroid_Huge-",
-		"hits": 8,
-		"attack": 15,
+		"hits": 6,
+		"attack": 5,
 		"num_textures": 4,
 		"collision": true,
 		"shrinks": false,
@@ -103,8 +103,8 @@ const ASTEROID_DATA = {
 	asteroid_size.BIG: {
 		"speed_range": Vector2(75, 150),
 		"prefix": "Asteroid_Big-",
-		"hits": 6,
-		"attack": 10,
+		"hits": 4,
+		"attack": 4,
 		"num_textures": 4,
 		"collision": true,
 		"shrinks": false,
@@ -118,8 +118,8 @@ const ASTEROID_DATA = {
 	asteroid_size.MEDIUM: {
 		"speed_range": Vector2(100, 200),
 		"prefix": "Asteroid_Medium-",
-		"hits": 4,
-		"attack": 5,
+		"hits": 2,
+		"attack": 3,
 		"num_textures": 2,
 		"collision": true,
 		"shrinks": false,
@@ -143,7 +143,7 @@ const ASTEROID_DATA = {
 		"bounce": 0.4,
 		"push_force": 2000.0,
 		"knockback_force": 20.0,
-		"points": 25
+		"points": 0
 	},
 	asteroid_size.TINY: {
 		"speed_range": Vector2(150, 300),
@@ -158,7 +158,7 @@ const ASTEROID_DATA = {
 		"bounce": 0.5,
 		"push_force": 2400.0,
 		"knockback_force": 10.0,
-		"points": 10
+		"points": 0
 	}
 }
 
