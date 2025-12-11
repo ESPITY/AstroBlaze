@@ -6,7 +6,7 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 var spawner: Dictionary
-var available_sizes = [Config.asteroid_size.MEDIUM, Config.asteroid_size.BIG, Config.asteroid_size.HUGE]
+var available_sizes = [Config.asteroid_size.HUGE, Config.asteroid_size.BIG, Config.asteroid_size.MEDIUM]
 
 
 # Ajusta el tiempo de spawneo según el nivel

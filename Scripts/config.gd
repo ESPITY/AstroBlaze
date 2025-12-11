@@ -48,7 +48,7 @@ const ENEMY_DATA = {
 const ENEMY_SPAWNER_DATA = {
 	1: {
 		"max_enemies": 2,
-		"spawn_interval": 15,
+		"spawn_interval": 8,
 	},
 	2: {
 		"max_enemies": 4,
@@ -56,7 +56,7 @@ const ENEMY_SPAWNER_DATA = {
 	},
 	3: {
 		"max_enemies": 6,
-		"spawn_interval": 5.0,
+		"spawn_interval": 6.0,
 	}
 }
 
@@ -66,20 +66,20 @@ enum asteroid_size {HUGE, BIG, MEDIUM, SMALL, TINY}
 # Datos de configuración del SPAWNER ASTEROIDES según el NIVEL
 const ASTEROID_SPAWNER_DATA = {
 	1: {
-		"max_asteroids": 5,
-		"spawn_interval": 2.0,
+		"max_asteroids": 6,
+		"spawn_interval": 1.0,
 		# Huge, big, medium, small, tiny
-		"size_rand_weights": [2.0, 1.0, 0.5]
+		"size_rand_weights": [0.5, 1.0, 2.0]
 	},
 	2: {
-		"max_asteroids": 8,
-		"spawn_interval": 1.0,
-		"size_rand_weights": [1.0, 2.0, 0.5]
+		"max_asteroids": 10,
+		"spawn_interval": 2.0,
+		"size_rand_weights": [0.5, 2.0, 1.0]
 	},
 	3: {
-		"max_asteroids": 11,
-		"spawn_interval": 0.5,
-		"size_rand_weights": [0.5, 1.0, 2.0]
+		"max_asteroids": 14,
+		"spawn_interval": 4.0,
+		"size_rand_weights": [1.2, 1.0, 0.5]
 	}
 }
 
@@ -165,10 +165,10 @@ const ASTEROID_DATA = {
 # Patrones de tamaños de DIVISIÓN del ASTEROIDE
 const SPLIT_PATTERNS = {
 	asteroid_size.HUGE: {
-		asteroid_size.BIG: Vector2i (2, 3),
-		asteroid_size.MEDIUM: Vector2i(0, 2),
-		asteroid_size.SMALL: Vector2i(0, 2),
-		asteroid_size.TINY: Vector2i(0, 1)
+		asteroid_size.BIG: [2, 3],
+		asteroid_size.MEDIUM: [0, 2],
+		asteroid_size.SMALL: [0, 2],
+		asteroid_size.TINY: [0, 1]
 	},
 	asteroid_size.BIG: {
 		asteroid_size.MEDIUM: [2, 3],
