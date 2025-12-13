@@ -40,7 +40,7 @@ var fired: bool = false
 
 # Vida
 @onready var healthbar = $healthbar
-@onready var explosion_vfx = preload("res://Scenes/explosion_vfx.tscn")
+@onready var explosion_vfx = $explosion_vfx
 
 @export var hit_effect_timer: float = 0.1
 @export var explosion_vfx_timer: float = 2
@@ -243,9 +243,7 @@ func death():
 	hits_collision.call_deferred("set", "disabled", true)
 	$physics_collision.call_deferred("set", "disabled", true)
 	
-	var explosion_inst = explosion_vfx.instantiate()
-	self.add_child(explosion_inst)
-	explosion_inst.play_vfx()
+	explosion_vfx.play_vfx()
 	await get_tree().create_timer(explosion_vfx_timer).timeout
 	
 	queue_free()

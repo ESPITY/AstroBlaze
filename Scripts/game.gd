@@ -6,6 +6,7 @@ extends Node2D
 
 @onready var death_screen = preload("res://Scenes/ui_scenes/death_screen.tscn")
 @onready var win_screen = preload("res://Scenes/ui_scenes/win_screen.tscn")
+@onready var explosion_vfx = preload("res://Scenes/explosion_vfx.tscn")
 
 var screen_size: Vector2
 var level_start_time: float = 0.0
