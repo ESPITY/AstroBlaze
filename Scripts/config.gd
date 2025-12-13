@@ -182,3 +182,15 @@ const SPLIT_PATTERNS = {
 	asteroid_size.SMALL: {},
 	asteroid_size.TINY: {}
 }
+
+
+# Precargar el VFX de la explosión al inicio del juego (autoload)
+@onready var explosion_vfx = preload("res://Scenes/explosion_vfx.tscn")
+
+func _ready():
+	var explosion_inst = explosion_vfx.instantiate()
+	add_child(explosion_inst)
+	explosion_inst.modulate = Color(1, 1, 1, 0)
+	explosion_inst.play_vfx()
+	await get_tree().create_timer(0.5).timeout
+	explosion_inst.queue_free()
