@@ -2,7 +2,7 @@ class_name Asteroid extends RigidBody2D
 
 
 @export var size = Config.asteroid_size.HUGE
-@export var max_speed: float = 400
+@export var max_speed: float = 300
 @export var expel_force: float = 200
 
 @onready var sprite = $asteroid_sprite
@@ -48,7 +48,8 @@ func _ready() -> void:
 func _physics_process(delta):
 	teleport()
 	shrink(delta)
-	linear_velocity = linear_velocity.limit_length(max_speed)
+	if linear_velocity.length() > max_speed:
+		linear_velocity = linear_velocity.limit_length(max_speed)
 	angular_velocity = clamp(angular_velocity, -2.0, 2.0)
 
 # El spawner llama a esta función para asignar la textura

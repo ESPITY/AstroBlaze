@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgd0ejjllpod"
-path="res://.godot/imported/panel_level2.png-4ccd47219ffe6f2a6cae346b6a481de3.ctex"
+path="res://.godot/imported/Panel_Level2.png-e74db4b5511fcd0106e96d1c961afcc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/ui/panel_level2.png"
-dest_files=["res://.godot/imported/panel_level2.png-4ccd47219ffe6f2a6cae346b6a481de3.ctex"]
+source_file="res://Sprites/ui/Panel_Level2.png"
+dest_files=["res://.godot/imported/Panel_Level2.png-e74db4b5511fcd0106e96d1c961afcc7.ctex"]
 
 [params]
 

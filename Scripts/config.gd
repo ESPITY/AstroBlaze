@@ -93,10 +93,10 @@ const ASTEROID_DATA = {
 		"num_textures": 4,
 		"collision": true,
 		"shrinks": false,
-		"mass": 10.0,
+		"mass": 50.0,
 		"friction": 0.0,
 		"bounce": 0.1,
-		"push_force": 800.0,
+		"push_force": 2500.0,
 		"knockback_force": 100.0,
 		"points": 100
 	},
@@ -108,10 +108,10 @@ const ASTEROID_DATA = {
 		"num_textures": 4,
 		"collision": true,
 		"shrinks": false,
-		"mass": 8.0,
+		"mass": 30.0,
 		"friction": 0.0,
 		"bounce": 0.2,
-		"push_force": 1200.0,
+		"push_force": 2000.0,
 		"knockback_force": 80.0,
 		"points": 75
 	},
@@ -123,10 +123,10 @@ const ASTEROID_DATA = {
 		"num_textures": 2,
 		"collision": true,
 		"shrinks": false,
-		"mass": 6.0,
+		"mass": 10.0,
 		"friction": 0.0,
 		"bounce": 0.3,
-		"push_force": 1600.0,
+		"push_force": 1200.0,
 		"knockback_force": 40.0,
 		"points": 50
 	},
@@ -141,7 +141,7 @@ const ASTEROID_DATA = {
 		"mass": 4.0,
 		"friction": 0.0,
 		"bounce": 0.4,
-		"push_force": 2000.0,
+		"push_force": 1200.0,
 		"knockback_force": 20.0,
 		"points": 0
 	},
@@ -156,7 +156,7 @@ const ASTEROID_DATA = {
 		"mass": 2.0,
 		"friction": 0.0,
 		"bounce": 0.5,
-		"push_force": 2400.0,
+		"push_force": 1200.0,
 		"knockback_force": 10.0,
 		"points": 0
 	}
