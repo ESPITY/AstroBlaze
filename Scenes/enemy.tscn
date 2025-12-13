@@ -49,7 +49,7 @@ position = Vector2(30, 0)
 rotation = 1.5707964
 
 [node name="timer_max_outside" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 10.0
 
 [node name="explosion_vfx" parent="." instance=ExtResource("2_0830c")]
 scale = Vector2(0.9999998, 0.9999998)
