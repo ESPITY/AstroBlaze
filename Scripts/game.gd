@@ -43,6 +43,7 @@ func start_game():
 	player.global_position = screen_size / 2
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	preload("res://Scenes/explosion_vfx.tscn")
 
 # Crea la región de navegación que ocupa toda la pantalla (+ margen)
 func set_nav_region():
