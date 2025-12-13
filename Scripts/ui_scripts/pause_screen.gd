@@ -14,7 +14,7 @@ func _ready() -> void:
 	fade_anim.stop()   # Detener inmediatamente
 
 # Manejo de inputs
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		if paused:	# Reanudar juego
 			resume()

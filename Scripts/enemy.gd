@@ -99,7 +99,7 @@ func _physics_process(delta):
 				
 		velocity = velocity.limit_length(max_speed)	# Velocidad máxima
 
-func _process(delta):
+func _process(_delta):
 	if health > 0 && player && player.health > 0:
 		teleport()
 	

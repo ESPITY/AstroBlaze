@@ -19,7 +19,7 @@ func _ready() -> void:
 	target_score_label.text = str(Config.LEVEL_TARGET_SCORE[Config.current_level])
 
 # Imprime en los labels la puntuación y el tiempo de juego
-func _process(delta):
+func _process(_delta):
 	current_score_label.text = str(Config.current_score)
 	level_elapsed_time_label.text = format_time(Config.level_elapsed_time)
 

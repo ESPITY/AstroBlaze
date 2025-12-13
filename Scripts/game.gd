@@ -16,7 +16,7 @@ func _ready() -> void:
 	start_game()
 	set_nav_region()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Config.playing:
 		Config.level_elapsed_time = (Time.get_ticks_msec() / 1000.0) - level_start_time
 		if Config.current_score >= Config.LEVEL_TARGET_SCORE[Config.current_level]:
@@ -24,9 +24,6 @@ func _process(delta: float) -> void:
 			
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
-	#print("NavigationRegion rebaked - Asteroides: ", get_tree().get_nodes_in_group("asteroids").size())
-	#print(Config.active_asteroids)
-	
 
 # Configuración inicial del juego
 func start_game():
@@ -59,16 +56,12 @@ func set_nav_region():
 	outline.append(Vector2(-margin, screen_size.y + margin))
 	
 	navigation_polygon.add_outline(outline)
-	navigation_polygon.make_polygons_from_outlines()
 	nav_region.navigation_polygon = navigation_polygon
-	
-	#nav_region.call_deferred("bake_navigation_polygon")
+	nav_region.bake_navigation_polygon()
 
 # Cuando se termina de bakear el NavRegion2D se vuelve a bakear
 func _on_navigation_region_2d_bake_finished() -> void:
 	rebake_timer = false
-	#if Config.playing:
-		#nav_region.bake_navigation_polygon()
 
 # Cuando acaba el timer se bakea el NavRegion (si no hay un bakeado en proceso
 func _on_nav_rebake_timer_timeout() -> void:
