@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cbb6up2g184tt"]
+[gd_scene load_steps=5 format=3 uid="uid://cbb6up2g184tt"]
 
 [ext_resource type="Script" uid="uid://bjpyrme1vg5jx" path="res://Scripts/enemy.gd" id="1_afpow"]
 [ext_resource type="PackedScene" uid="uid://b6483cyd0gayi" path="res://Scenes/ui_scenes/healthbar.tscn" id="2_287tu"]
-[ext_resource type="PackedScene" uid="uid://twbv8aufq15s" path="res://Scenes/explosion_vfx.tscn" id="2_0830c"]
 [ext_resource type="Texture2D" uid="uid://brpbo800d2dl2" path="res://Sprites/spaceships/enemy_spaceship.png" id="2_afpow"]
 [ext_resource type="Texture2D" uid="uid://db3nuvukja5no" path="res://Sprites/spaceships/spaceship_trail.png" id="3_afpow"]
 
@@ -50,9 +49,6 @@ rotation = 1.5707964
 
 [node name="timer_max_outside" type="Timer" parent="."]
 wait_time = 10.0
-
-[node name="explosion_vfx" parent="." instance=ExtResource("2_0830c")]
-scale = Vector2(0.9999998, 0.9999998)
 
 [node name="Area2D_hits" type="Area2D" parent="."]
 scale = Vector2(0.99999994, 0.99999994)

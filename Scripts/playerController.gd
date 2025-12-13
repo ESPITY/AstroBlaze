@@ -50,7 +50,7 @@ var sprite_size: Vector2
 var fired: bool = false
 
 # Vida
-@onready var explosion_vfx = $explosion_vfx
+@onready var explosion_vfx = preload("res://Scenes/explosion_vfx.tscn")
 @onready var death_screen = preload("res://Scenes/ui_scenes/death_screen.tscn")
 
 @export var hit_effect_timer: float = 0.1
@@ -224,7 +224,9 @@ func death():
 	$physics_collision.call_deferred("set", "disabled", true)
 	Config.playing = false
 	
-	explosion_vfx.play_vfx()
+	var explosion_inst = explosion_vfx.instantiate()
+	self.add_child(explosion_inst)
+	explosion_inst.play_vfx()
 	await get_tree().create_timer(explosion_vfx_timer).timeout
 	
 	get_tree().change_scene_to_packed(death_screen)
