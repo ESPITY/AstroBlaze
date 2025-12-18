@@ -1,4 +1,4 @@
-# TO-DO REFACTOR: herencia de clase base
+# player.gd -> TO-DO REFACTOR: herencia de clase base
 extends CharacterBody2D
 
 # Rotación: radianes/s y radianes/s^2
@@ -30,6 +30,8 @@ var propeller_options = {
 	"down_left": [false, false, false, true]
 }
 
+@onready var S_propellers: AudioStreamPlayer = $S_propellers
+
 # Wrap around
 @onready var sprite = $spaceship_sprite
 @onready var timer_max_outside = $timer_max_outside
@@ -44,6 +46,7 @@ var sprite_size: Vector2
 @onready var bullet = preload("res://Scenes/bullet.tscn")
 @onready var left_gun = $left_gun
 @onready var right_gun = $right_gun
+@onready var S_fire: AudioStreamPlayer = $S_fire
 
 @export var fire_rate: float = 0.5
 
@@ -51,7 +54,9 @@ var fired: bool = false
 
 # Vida
 @onready var explosion_vfx = $explosion_vfx
+@onready var S_explosion: AudioStreamPlayer = $S_explosion
 @onready var death_screen = preload("res://Scenes/ui_scenes/death_screen.tscn")
+@onready var S_impact_spaceship: AudioStreamPlayer = $S_impact_spaceship
 
 @export var hit_effect_timer: float = 0.1
 @export var explosion_vfx_timer: float = 2
@@ -74,7 +79,7 @@ func _physics_process(delta):
 		move_and_slide()
 		teleport()
 		fire()
-		velocity = velocity.limit_length(max_speed)	# Velocidad máxima
+		velocity = velocity.limit_length(max_speed)		# Velocidad máxima
 	
 # Movimiento con fricción y aceleración	
 func rotate_player(delta):
@@ -133,6 +138,7 @@ func fire():
 		bullet_inst2.global_position = right_gun.global_position
 		bullet_inst2.rotation = rotation
 		
+		S_fire.play()
 		await get_tree().create_timer(fire_rate).timeout
 		fired = false
 		
@@ -141,7 +147,7 @@ func _input(event):
 		if event.pressed || event.is_released():
 			propulsion()	# Solo realizar la comprobación cuando se pulsa o suelta una tecla
 
-# Visibilidad de los propulsores según el movimiento
+# Visibilidad de los propulsores según el movimiento (+ sonido)
 func propulsion():
 	var input_action = "none"
 	if Input.is_action_pressed("up") && Input.is_action_pressed("right"):
@@ -168,13 +174,19 @@ func propulsion():
 	back_right_propeller.visible = propellers[1]
 	front_left_propeller.visible = propellers[2]
 	front_right_propeller.visible = propellers[3]
+	
+	if !input_action == "none" && !S_propellers.playing:
+		S_propellers.play()
+	elif input_action == "none" && S_propellers.playing:
+		S_propellers.stop()
 
 # Detección de choque
 func _on_area_2d_hits_body_entered(body: Node2D) -> void:
+	S_impact_spaceship.play()
 	if body.is_in_group("asteroids"):
 		var asteroid = Config.ASTEROID_DATA[body.size]
 		
-		# Empuja al asteroide según la dirección y la masa del asteroide
+		# Empuja al asteroide según la dirección de choque y la masa del asteroide
 		var push_direction = (body.global_position - global_position).normalized()
 		var push_force = asteroid["push_force"]
 		body.apply_central_impulse(push_direction * push_force)
@@ -209,7 +221,7 @@ func damaged(damage):
 		death()
 	emit_signal("update_healthbar", health)
 	
-# Muerte con explosión
+# Muerte con explosión y sonido
 func death():
 	health = 0
 	emit_signal("update_healthbar", health)
@@ -225,6 +237,7 @@ func death():
 	Config.playing = false
 	
 	explosion_vfx.play_vfx()
+	S_explosion.play()
 	await get_tree().create_timer(explosion_vfx_timer).timeout
 	
 	get_tree().change_scene_to_packed(death_screen)

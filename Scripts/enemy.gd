@@ -1,4 +1,4 @@
-# TO-DO REFACTOR: herencia de clase base
+# enemy.gd -> TO-DO REFACTOR: herencia de clase base
 extends CharacterBody2D
 
 # Navigation
@@ -33,6 +33,7 @@ var sprite_size: Vector2
 # Disparar
 @onready var bullet = preload("res://Scenes/bullet.tscn")
 @onready var gun = $gun
+@onready var S_fire: AudioStreamPlayer = $S_fire
 
 @export var fire_rate: float = 0.5
 
@@ -41,6 +42,8 @@ var fired: bool = false
 # Vida
 @onready var healthbar = $healthbar
 @onready var explosion_vfx = $explosion_vfx
+@onready var S_explosion: AudioStreamPlayer = $S_explosion
+@onready var S_impact_spaceship: AudioStreamPlayer = $S_impact_spaceship
 
 @export var hit_effect_timer: float = 0.1
 @export var explosion_vfx_timer: float = 2
@@ -139,7 +142,7 @@ func get_closest_target() -> Vector2:
 	
 	return closest_target
 		
-# El NavigationAgent2D calcula la velocidad teniendo en uenta el avoidance
+# El NavigationAgent2D calcula la velocidad teniendo en cuenta el avoidance
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if current_state == State.APPROACHING:
 		velocity = safe_velocity
@@ -189,12 +192,14 @@ func fire():
 		get_parent().add_child(bullet_inst)
 		bullet_inst.global_position = gun.global_position
 		bullet_inst.rotation = rotation
-			
+		
+		S_fire.play()
 		await get_tree().create_timer(fire_rate).timeout
 		fired = false
 
 # Detección de choque
 func _on_area_2d_hits_body_entered(body: Node2D) -> void:
+	S_impact_spaceship.play()
 	if body.is_in_group("asteroids"):
 		var asteroid = Config.ASTEROID_DATA[body.size]
 		
@@ -244,6 +249,7 @@ func death():
 	$physics_collision.call_deferred("set", "disabled", true)
 	
 	explosion_vfx.play_vfx()
+	S_explosion.play()
 	await get_tree().create_timer(explosion_vfx_timer).timeout
 	
 	queue_free()

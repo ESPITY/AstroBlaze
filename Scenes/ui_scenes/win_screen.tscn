@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dwmbaqum8x375"]
+[gd_scene load_steps=17 format=3 uid="uid://dwmbaqum8x375"]
 
 [ext_resource type="Script" uid="uid://dbeumfxk6r8wn" path="res://Scripts/ui_scripts/win_screen.gd" id="1_s1rtq"]
 [ext_resource type="Texture2D" uid="uid://5ykemf7p36lh" path="res://Sprites/ui/button_rectangle.png" id="2_7piwm"]
@@ -7,9 +7,26 @@
 [ext_resource type="StyleBox" uid="uid://0sfabesjaq6g" path="res://Resources/buttons_themes/button_pressed.tres" id="5_c6gew"]
 [ext_resource type="StyleBox" uid="uid://bdd46xgdpk83q" path="res://Resources/buttons_themes/button_hover.tres" id="6_5l13k"]
 [ext_resource type="Texture2D" uid="uid://bw1xynu23lsqm" path="res://Sprites/ui/UI_time.png" id="7_7piwm"]
+[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Audio/S_rand_button_click.tres" id="8_tgmyb"]
+[ext_resource type="AudioStream" uid="uid://pjuaccbd1wv6" path="res://Audio/S_win.ogg" id="9_j6k0s"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4e4vb"]
 texture = ExtResource("2_7piwm")
+
+[sub_resource type="Animation" id="Animation_tgmyb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("new_record/Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_7piwm"]
 resource_name = "new_record_blink_effect"
@@ -26,21 +43,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_tgmyb"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("new_record/Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j6k0s"]
@@ -279,6 +281,13 @@ theme_override_styles/pressed = ExtResource("5_c6gew")
 theme_override_styles/hover = ExtResource("6_5l13k")
 text = "LEVELS
 "
+
+[node name="S_button_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_tgmyb")
+volume_db = -2.0
+
+[node name="S_win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_j6k0s")
 
 [connection signal="pressed" from="VBoxContainer/buttons/MarginContainer2/Panel/MarginContainer/restart_button" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/buttons/MarginContainer3/Panel2/MarginContainer/menu_button" to="." method="_on_menu_button_pressed"]

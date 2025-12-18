@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var fade_anim = $AnimationPlayer
+@onready var S_button_click: AudioStreamPlayer = $S_button_click
 
 var paused: bool = false
 
@@ -43,20 +44,27 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "pause" and !paused:
 		hide()
 
-# Botón de reaundar
+# Botón de reaundar (sonido de click)
 func _on_resume_button_pressed() -> void:
+	S_button_click.play()
 	resume()
 
-# Botón de reseteo de nivel
+# Botón de reseteo de nivel (sonido de click)
 func _on_restart_button_pressed() -> void:
+	S_button_click.play()
+	await get_tree().create_timer(0.04).timeout
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
-# Botón de regresar al menú principal
+# Botón de regresar al menú principal (sonido de click)
 func _on_menu_button_pressed() -> void:
+	S_button_click.play()
+	await get_tree().create_timer(0.04).timeout
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/ui_scenes/main_menu.tscn")
 
-# Botón de salir del juego
+# Botón de salir del juego (sonido de click)
 func _on_exit_button_pressed() -> void:
+	S_button_click.play()
+	await get_tree().create_timer(0.04).timeout
 	get_tree().quit()

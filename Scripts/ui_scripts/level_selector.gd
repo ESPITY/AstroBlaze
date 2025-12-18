@@ -1,3 +1,4 @@
+# level_selector.gd
 extends Control
 
 @onready var game_scene = preload("res://Scenes/game.tscn")
@@ -7,6 +8,7 @@ extends Control
 @onready var lvl2_time = $VBoxContainer/levels/HBoxContainer/level2/MarginContainer/VBoxContainer/HBoxContainer2/label2_time
 @onready var lvl3_objective = $VBoxContainer/levels/HBoxContainer/level3/MarginContainer/VBoxContainer/HBoxContainer/label3_objective
 @onready var lvl3_time = $VBoxContainer/levels/HBoxContainer/level3/MarginContainer/VBoxContainer/HBoxContainer2/label3_time
+@onready var S_button_click: AudioStreamPlayer = $S_button_click
 
 # Muestra el cursor y actualza las labels con el objetivo de cada nivel y el mejor tiempo
 func _ready() -> void:
@@ -31,21 +33,29 @@ func format_time(seconds: float) -> String:
 	
 	return "%02d:%02d:%02d" % [mins, secs, hunds]
 	
-# Botón nivel 1
+# Botón nivel 1 (sonido de click)
 func _on_level_1_button_pressed() -> void:
+	S_button_click.play()
+	await get_tree().create_timer(0.04).timeout
 	Config.current_level = 1
 	get_tree().change_scene_to_packed(game_scene)
 
-# Botón nivel 2
+# Botón nivel 2 (sonido de click)
 func _on_level_2_button_pressed() -> void:
+	S_button_click.play()
+	await get_tree().create_timer(0.04).timeout
 	Config.current_level = 2
 	get_tree().change_scene_to_packed(game_scene)
 
-# Botón nivel 3
+# Botón nivel 3 (sonido de click)
 func _on_level_3_button_pressed() -> void:
+	S_button_click.play()
+	await get_tree().create_timer(0.04).timeout
 	Config.current_level = 3
 	get_tree().change_scene_to_packed(game_scene)
 
-# Botón volver al menú principal
+# Botón volver al menú principal (sonido de click)
 func _on_back_button_pressed() -> void:
+	S_button_click.play()
+	await get_tree().create_timer(0.04).timeout
 	get_tree().change_scene_to_file("res://Scenes/ui_scenes/main_menu.tscn")

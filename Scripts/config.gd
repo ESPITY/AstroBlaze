@@ -184,8 +184,9 @@ const SPLIT_PATTERNS = {
 }
 
 
-# Precargar el VFX de la explosión al inicio del juego (autoload)
+# Precargar el VFX de la explosión al inicio del juego (autoload) y la música
 @onready var explosion_vfx = preload("res://Scenes/explosion_vfx.tscn")
+@onready var music: AudioStreamMP3 = load("res://Audio/S_music.mp3")
 
 func _ready():
 	var explosion_inst = explosion_vfx.instantiate()
@@ -194,3 +195,11 @@ func _ready():
 	explosion_inst.play_vfx()
 	await get_tree().create_timer(0.5).timeout
 	explosion_inst.queue_free()
+	
+	var S_music = AudioStreamPlayer.new()
+	add_child(S_music)
+	S_music.set_stream(music)
+	S_music.volume_db = -8
+	S_music.pitch_scale = 0.8
+	S_music.play()
+	

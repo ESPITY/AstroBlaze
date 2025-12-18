@@ -1,3 +1,4 @@
+# game.gd
 extends Node2D
 
 @onready var nav_region = $NavigationRegion2D
@@ -15,15 +16,13 @@ var rebake_timer: bool = false
 func _ready() -> void:
 	start_game()
 	set_nav_region()
-	
+
+# Comprobación de si se ha alcanzado el objetivo (ganar)
 func _process(_delta: float) -> void:
 	if Config.playing:
 		Config.level_elapsed_time = (Time.get_ticks_msec() / 1000.0) - level_start_time
 		if Config.current_score >= Config.LEVEL_TARGET_SCORE[Config.current_level]:
 			get_tree().change_scene_to_packed(win_screen)
-			
-	if Input.is_action_just_pressed("reset"):
-		get_tree().reload_current_scene()
 
 # Configuración inicial del juego
 func start_game():
@@ -63,7 +62,7 @@ func set_nav_region():
 func _on_navigation_region_2d_bake_finished() -> void:
 	rebake_timer = false
 
-# Cuando acaba el timer se bakea el NavRegion (si no hay un bakeado en proceso
+# Cuando acaba el timer se bakea el NavRegion (si no hay un bakeado en proceso)
 func _on_nav_rebake_timer_timeout() -> void:
 	if Config.playing and !rebake_timer:
 		rebake_timer = true

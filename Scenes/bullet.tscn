@@ -1,12 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4l0wxextumfs"]
+[gd_scene load_steps=15 format=3 uid="uid://b4l0wxextumfs"]
 
 [ext_resource type="Script" uid="uid://p82nirnxv862" path="res://Scripts/bullet.gd" id="1_oduel"]
 [ext_resource type="Texture2D" uid="uid://di2cw0g4hxxsw" path="res://Sprites/spaceships/player_bullet.png" id="1_xjght"]
 [ext_resource type="Texture2D" uid="uid://bc1dr5c3aehqm" path="res://Sprites/spaceships/enemy_bullet.png" id="3_6afsh"]
 [ext_resource type="Texture2D" uid="uid://gtgl1v6k4h0t" path="res://Sprites/spaceships/bullet_trail.png" id="3_ycag2"]
+[ext_resource type="AudioStream" uid="uid://hhberjjproac" path="res://Audio/S_impact_spaceship_1.ogg" id="5_0kq1l"]
+[ext_resource type="AudioStream" uid="uid://btijr832g83lv" path="res://Audio/S_impact_spaceship_2.ogg" id="6_lv37c"]
+[ext_resource type="AudioStream" uid="uid://5s776db0at82" path="res://Audio/S_impact_spaceship_3.ogg" id="7_1l14f"]
+[ext_resource type="AudioStream" uid="uid://croeg3w057eo3" path="res://Audio/S_impact_spaceship_4.ogg" id="8_tvxb2"]
+[ext_resource type="AudioStream" uid="uid://imh6bv3j7tv6" path="res://Audio/S_impact_spaceship_5.ogg" id="9_3pnf4"]
+[ext_resource type="AudioStream" uid="uid://dg8ykshvdnpwc" path="res://Audio/S_impact_asteroid_1.ogg" id="10_lv37c"]
+[ext_resource type="AudioStream" uid="uid://cc3b4tgkpax8x" path="res://Audio/S_impact_assteroid_2.ogg" id="11_1l14f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xjght"]
 size = Vector2(12, 48)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_o7ppg"]
+streams_count = 5
+stream_0/stream = ExtResource("5_0kq1l")
+stream_1/stream = ExtResource("6_lv37c")
+stream_2/stream = ExtResource("7_1l14f")
+stream_3/stream = ExtResource("8_tvxb2")
+stream_4/stream = ExtResource("9_3pnf4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tvxb2"]
+streams_count = 2
+stream_0/stream = ExtResource("10_lv37c")
+stream_1/stream = ExtResource("11_1l14f")
 
 [node name="bullet" type="Area2D"]
 scale = Vector2(0.8, 0.8)
@@ -30,5 +50,12 @@ texture = ExtResource("3_ycag2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_xjght")
+
+[node name="S_impact_spaceship" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_o7ppg")
+
+[node name="S_impact_asteroid" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_tvxb2")
+volume_db = 4.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

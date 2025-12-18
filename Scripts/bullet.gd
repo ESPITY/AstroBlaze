@@ -1,3 +1,4 @@
+# bullet.gd
 extends Area2D
 
 @export var speed: float = 1000
@@ -5,6 +6,8 @@ extends Area2D
 @export var enemy_bullet_texture: Texture2D
 
 @onready var bullet_sprite = $bullet_sprite
+@onready var S_impact_spaceship: AudioStreamPlayer = $S_impact_spaceship
+@onready var S_impact_asteroid: AudioStreamPlayer = $S_impact_asteroid
 
 
 # Configura textura, colisiones y máscaras según el origen del disparo (jugador/enemigo)
@@ -35,11 +38,15 @@ func out_of_bounds():
 # Detección de colisiones
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("asteroids"):
+		S_impact_asteroid.play()
 		body.explode()
 	if body.is_in_group("player"):
+		S_impact_spaceship.play()
 		body.damaged(Config.ENEMY_DATA["attack"])
 		body.hit_effect()
 	if body.is_in_group("enemies"):
+		S_impact_spaceship.play()
 		body.damaged(Config.PLAYER_DATA["attack"])
 		body.hit_effect()
+	await get_tree().create_timer(0.05).timeout
 	queue_free()

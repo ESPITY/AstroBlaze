@@ -1,5 +1,5 @@
+# asteroid.gd
 class_name Asteroid extends RigidBody2D
-
 
 @export var size = Config.asteroid_size.HUGE
 @export var max_speed: float = 300
@@ -20,6 +20,7 @@ var sprite_size: Vector2
 signal exploded(size, pos)	# Cuando explota se lo indica al spawner (dividirse)
 
 
+# Asignar los valores correspondientes, la colisión, la textura y la velocidad y dirección aleatorias
 func _ready() -> void:
 	asteroid = Config.ASTEROID_DATA[size]	
 
@@ -48,6 +49,7 @@ func _ready() -> void:
 func _physics_process(delta):
 	teleport()
 	shrink(delta)
+	# Límite de velocidad
 	if linear_velocity.length() > max_speed:
 		linear_velocity = linear_velocity.limit_length(max_speed)
 	angular_velocity = clamp(angular_velocity, -2.0, 2.0)

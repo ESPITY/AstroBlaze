@@ -1,3 +1,4 @@
+# hud.gd
 extends CanvasLayer
 
 @onready var healthbar = $MarginContainer/HBoxContainer/healthbar
@@ -5,7 +6,7 @@ extends CanvasLayer
 @onready var level_elapsed_time_label = $MarginContainer/HBoxContainer/HBoxContainer2/level_elapsed_time_label
 @onready var target_score_label =$MarginContainer/HBoxContainer/HBoxContainer/target_score_label
 
-# Obtiene el jugador y lo conectar a la healthbar, signándole la vida máxima
+# Obtiene el jugador y lo conecta a la healthbar, asignándole la vida máxima
 func _ready() -> void:
 	var player: CharacterBody2D
 	var nodes = get_tree().get_nodes_in_group("player")

@@ -1,3 +1,4 @@
+# asteroid_spawner.gd
 extends Node2D
 
 @export var asteroid: PackedScene

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv318nu4vf0ra"]
+[gd_scene load_steps=9 format=3 uid="uid://dv318nu4vf0ra"]
 
 [ext_resource type="Script" uid="uid://b3wxjqhighq0s" path="res://Scripts/ui_scripts/main_menu.gd" id="1_j6qk4"]
 [ext_resource type="Texture2D" uid="uid://bcmhugmudw0ky" path="res://Sprites/ui/button_square_header_small_square.png" id="2_5unlo"]
@@ -6,6 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://2rw3badxkoaf" path="res://Resources/buttons_themes/button_normal.tres" id="4_w83ce"]
 [ext_resource type="StyleBox" uid="uid://0sfabesjaq6g" path="res://Resources/buttons_themes/button_pressed.tres" id="5_gh8sf"]
 [ext_resource type="StyleBox" uid="uid://bdd46xgdpk83q" path="res://Resources/buttons_themes/button_hover.tres" id="6_a2xmf"]
+[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Audio/S_rand_button_click.tres" id="7_5unlo"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ce3w2"]
 texture = ExtResource("2_5unlo")
@@ -104,6 +105,10 @@ theme_override_styles/normal = ExtResource("4_w83ce")
 theme_override_styles/pressed = ExtResource("5_gh8sf")
 theme_override_styles/hover = ExtResource("6_a2xmf")
 text = "EXIT"
+
+[node name="S_button_click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_5unlo")
+volume_db = -2.0
 
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/MarginContainer3/play_button" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/MarginContainer4/exit_button" to="." method="_on_exit_button_pressed"]

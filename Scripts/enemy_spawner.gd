@@ -1,3 +1,4 @@
+# enemy_spawner.gd
 extends Node2D
 
 @export var enemy: PackedScene
@@ -29,7 +30,7 @@ func rand_position():
 		3: return Vector2(randf_range(0, screen_size.x), screen_size.y + texture_size.y)
 
 # Spawnea el enemigo en una posición aleatoria fuera de pantalla
-func spawn_asteroid():
+func spawn_enemy():
 	Config.active_enemies += 1
 
 	var new_pos = rand_position()
@@ -39,7 +40,7 @@ func spawn_asteroid():
 	
 	call_deferred("add_child", enemy_inst)
 
-# Cuando pasa el tiempo de spawneo se crea un asteroide si no se ha alcanzado el maximo (tamaño aleatorio)	
+# Cuando pasa el tiempo de spawneo se crea un enemigo si no se ha alcanzado el maximo (tamaño aleatorio)	
 func _on_spawn_timer_timeout() -> void:
 	if Config.active_enemies < spawner["max_enemies"]:
-		spawn_asteroid()
+		spawn_enemy()
