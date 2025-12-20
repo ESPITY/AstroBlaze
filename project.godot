@@ -13,6 +13,8 @@ config_version=5
 config/name="AstroBlaze"
 run/main_scene="uid://dv318nu4vf0ra"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://dlfkqtnv57wmt"
 config/icon="uid://dkt3f4mt6kc7h"
 
 [autoload]
@@ -30,10 +32,10 @@ mouse_cursor/custom_image="uid://eobefpvduag6"
 [file_customization]
 
 folder_colors={
-"res://Audio/": "blue",
 "res://Resources/": "purple",
 "res://Scenes/": "red",
 "res://Scripts/": "yellow",
+"res://Sound/": "blue",
 "res://Sprites/": "green",
 "res://docs/": "gray"
 }

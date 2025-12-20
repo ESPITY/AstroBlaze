@@ -7,8 +7,8 @@
 [ext_resource type="StyleBox" uid="uid://0sfabesjaq6g" path="res://Resources/buttons_themes/button_pressed.tres" id="5_c6gew"]
 [ext_resource type="StyleBox" uid="uid://bdd46xgdpk83q" path="res://Resources/buttons_themes/button_hover.tres" id="6_5l13k"]
 [ext_resource type="Texture2D" uid="uid://bw1xynu23lsqm" path="res://Sprites/ui/UI_time.png" id="7_7piwm"]
-[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Audio/S_rand_button_click.tres" id="8_tgmyb"]
-[ext_resource type="AudioStream" uid="uid://pjuaccbd1wv6" path="res://Audio/S_win.ogg" id="9_j6k0s"]
+[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Sound/S_rand_button_click.tres" id="8_tgmyb"]
+[ext_resource type="AudioStream" uid="uid://cnisvrarft73r" path="res://Sound/S_win.wav" id="9_j6k0s"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4e4vb"]
 texture = ExtResource("2_7piwm")

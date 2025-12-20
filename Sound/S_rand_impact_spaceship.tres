@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://14yilvo5jg1y"]
+
+[ext_resource type="AudioStream" uid="uid://bp75v0fbkin7e" path="res://Sound/S_impact_spaceship_1.wav" id="1_6ng8m"]
+[ext_resource type="AudioStream" uid="uid://bi7jylw1p704r" path="res://Sound/S_impact_spaceship_2.wav" id="2_ckvus"]
+[ext_resource type="AudioStream" uid="uid://o87toupco61y" path="res://Sound/S_impact_spaceship_3.wav" id="3_l3pr2"]
+[ext_resource type="AudioStream" uid="uid://c3vasoic272ej" path="res://Sound/S_impact_spaceship_4.wav" id="4_7shp5"]
+[ext_resource type="AudioStream" uid="uid://nbg3f7ojnidb" path="res://Sound/S_impact_spaceship_5.wav" id="5_sfg8f"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_6ng8m")
+stream_1/stream = ExtResource("2_ckvus")
+stream_2/stream = ExtResource("3_l3pr2")
+stream_3/stream = ExtResource("4_7shp5")
+stream_4/stream = ExtResource("5_sfg8f")

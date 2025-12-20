@@ -1,25 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbr0we6yg5x5p"]
+[gd_scene load_steps=9 format=3 uid="uid://dbr0we6yg5x5p"]
 
 [ext_resource type="Script" uid="uid://be6f1o5dsitif" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://k54a1p0qy2iv" path="res://Sprites/spaceships/player_scapeship.png" id="1_v0iea"]
 [ext_resource type="Texture2D" uid="uid://db3nuvukja5no" path="res://Sprites/spaceships/spaceship_trail.png" id="3_6t5aa"]
 [ext_resource type="PackedScene" uid="uid://twbv8aufq15s" path="res://Scenes/explosion_vfx.tscn" id="4_vgqql"]
-[ext_resource type="AudioStream" uid="uid://21hojwxmve83" path="res://Audio/S_rand_explosion.tres" id="5_fkybt"]
-[ext_resource type="AudioStream" uid="uid://bluq03o4y4bgq" path="res://Audio/S_fire.ogg" id="6_x3wgy"]
-[ext_resource type="AudioStream" uid="uid://cb6njuwyggefl" path="res://Audio/S_propellers.ogg" id="7_3smsa"]
-[ext_resource type="AudioStream" uid="uid://hhberjjproac" path="res://Audio/S_impact_spaceship_1.ogg" id="8_pu2lt"]
-[ext_resource type="AudioStream" uid="uid://btijr832g83lv" path="res://Audio/S_impact_spaceship_2.ogg" id="9_ukyrk"]
-[ext_resource type="AudioStream" uid="uid://5s776db0at82" path="res://Audio/S_impact_spaceship_3.ogg" id="10_7dp3o"]
-[ext_resource type="AudioStream" uid="uid://croeg3w057eo3" path="res://Audio/S_impact_spaceship_4.ogg" id="11_h4iuc"]
-[ext_resource type="AudioStream" uid="uid://imh6bv3j7tv6" path="res://Audio/S_impact_spaceship_5.ogg" id="12_fd4e3"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qqcod"]
-streams_count = 5
-stream_0/stream = ExtResource("8_pu2lt")
-stream_1/stream = ExtResource("9_ukyrk")
-stream_2/stream = ExtResource("10_7dp3o")
-stream_3/stream = ExtResource("11_h4iuc")
-stream_4/stream = ExtResource("12_fd4e3")
+[ext_resource type="AudioStream" uid="uid://21hojwxmve83" path="res://Sound/S_rand_explosion.tres" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://bb5p0io5le2qq" path="res://Sound/S_fire.wav" id="6_8erm5"]
+[ext_resource type="AudioStream" uid="uid://brx334btoorgy" path="res://Sound/S_propellers.wav" id="7_8erm5"]
+[ext_resource type="AudioStream" uid="uid://14yilvo5jg1y" path="res://Sound/S_rand_impact_spaceship.tres" id="8_f1ek2"]
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 scale = Vector2(0.8, 0.8)
@@ -99,15 +87,15 @@ volume_db = -8.0
 pitch_scale = 0.8
 
 [node name="S_fire" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_x3wgy")
+stream = ExtResource("6_8erm5")
 volume_db = -8.0
 
 [node name="S_propellers" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_3smsa")
+stream = ExtResource("7_8erm5")
 volume_db = 4.0
 
 [node name="S_impact_spaceship" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_qqcod")
+stream = ExtResource("8_f1ek2")
 
 [connection signal="timeout" from="timer_max_outside" to="." method="_on_timer_max_outside_timeout"]
 [connection signal="body_entered" from="Area2D_hits" to="." method="_on_area_2d_hits_body_entered"]

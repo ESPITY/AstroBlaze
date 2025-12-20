@@ -6,8 +6,8 @@
 [ext_resource type="StyleBox" uid="uid://2rw3badxkoaf" path="res://Resources/buttons_themes/button_normal.tres" id="4_wq2ht"]
 [ext_resource type="StyleBox" uid="uid://0sfabesjaq6g" path="res://Resources/buttons_themes/button_pressed.tres" id="5_6mbel"]
 [ext_resource type="StyleBox" uid="uid://bdd46xgdpk83q" path="res://Resources/buttons_themes/button_hover.tres" id="6_ne20l"]
-[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Audio/S_rand_button_click.tres" id="7_6r5yv"]
-[ext_resource type="AudioStream" uid="uid://c0ryq2jij2qxh" path="res://Audio/S_game_over.ogg" id="8_hsovy"]
+[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Sound/S_rand_button_click.tres" id="7_6r5yv"]
+[ext_resource type="AudioStream" uid="uid://dodunu46n6vyn" path="res://Sound/S_game_over.wav" id="8_hsovy"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4e4vb"]
 texture = ExtResource("2_6r5yv")

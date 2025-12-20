@@ -11,7 +11,7 @@
 [ext_resource type="StyleBox" uid="uid://bdd46xgdpk83q" path="res://Resources/buttons_themes/button_hover.tres" id="7_7saco"]
 [ext_resource type="Texture2D" uid="uid://dgd0ejjllpod" path="res://Sprites/ui/Panel_Level2.png" id="8_scpoi"]
 [ext_resource type="Texture2D" uid="uid://cbbcccgs4y2it" path="res://Sprites/ui/Panel_Level3.png" id="9_wavag"]
-[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Audio/S_rand_button_click.tres" id="12_tn34m"]
+[ext_resource type="AudioStream" uid="uid://b1idnvn77k077" path="res://Sound/S_rand_button_click.tres" id="12_tn34m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oef0k"]
 texture = ExtResource("2_87lq4")
